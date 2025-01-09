@@ -1,0 +1,220 @@
+html {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle, #d7efff, #b9e4ff, #9bd8ff);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 90%;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    text-align: center;
+    line-height: 1.8;
+    animation: fadeSlideIn 1.2s ease-out;
+}
+
+h1 {
+    background: linear-gradient(90deg, #f57c00, #ef5350, #ec407a);
+    color: white;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 15px;
+    font-size: 2.8rem;
+    text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    animation: glow 3s infinite alternate;
+    transform: scale(1.05);
+    background-size: 200% 200%;
+    background-clip: text;
+    color: transparent;
+}
+
+p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #555;
+    animation: slideFadeIn 1.5s ease;
+}
+
+#wrapper {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 25px;
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
+    transition: all 0.4s ease;
+    animation: dropIn 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#wrapper:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(120deg, #ffffff, #f9f9ff);
+}
+
+button {
+    background: linear-gradient(135deg, #1e88e5, #6a1b9a);
+    color: white;
+    width: 220px;
+    height: 50px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    border: none;
+    margin: 1rem;
+    cursor: pointer;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease, background 0.4s ease;
+    animation: pulseGlow 2s infinite;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #0d47a1, #4a148c);
+    transform: scale(1.1) rotate(-1deg);
+}
+
+#sub {
+    background: linear-gradient(135deg, #ffa726, #f57c00);
+    color: white;
+    width: 250px;
+    height: 55px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease, background 0.4s ease;
+    animation: bounce 2s infinite ease-in-out;
+}
+
+#sub:hover {
+    background: linear-gradient(135deg, #e65100, #bf360c);
+    transform: scale(1.15) rotate(2deg);
+}
+
+#guessField {
+    width: 90%;
+    max-width: 550px;
+    height: 50px;
+    font-size: 1.1rem;
+    border: 2px solid #42a5f5;
+    border-radius: 12px;
+    padding: 0.5rem;
+    margin: 1rem auto;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+#guessField:focus {
+    border-color: #1e88e5;
+    box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+}
+
+#guess {
+    font-size: 2.2rem;
+    margin-top: 2rem;
+    color: #43a047;
+    animation: popIn 1s ease-out;
+}
+
+.guesses, .lastResult {
+    padding: 12px;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    margin: 1rem auto;
+    width: 90%;
+    max-width: 550px;
+    text-align: center;
+}
+
+.guesses {
+    background: linear-gradient(90deg, #03a9f4, #0288d1);
+    color: white;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeSlideIn 1s ease-out;
+}
+
+.lastResult {
+    background: linear-gradient(90deg, #f44336, #d32f2f);
+    color: white;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeSlideIn 1s ease-out;
+}
+
+/* Keyframes for Animations */
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    from {
+        background-position: 0% 50%;
+    }
+    to {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 8px rgba(33, 150, 243, 0.5);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 8px 15px rgba(33, 150, 243, 0.7);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes dropIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
