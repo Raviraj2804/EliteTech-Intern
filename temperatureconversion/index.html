@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+        .title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .title h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        .Temperature-icon i {
+            font-size: 1.5rem;
+            color: #ff5722;
+        }
+        input {
+            width: calc(100% - 40px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .icon {
+            margin-left: 10px;
+        }
+        .button button {
+            background-color: #ff5722;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .button button:hover {
+            background-color: #e64a19;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+            .title h1 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>Temperature Converter</h1>
+            <span class="Temperature-icon"><i class="fa-solid fa-temperature-three-quarters"></i></span>
+        </div>
+        <div id="celsius">
+            <input type="number" name="" placeholder="Celsius">
+            <span class="icon">&#8451;</span>
+        </div>
+        <div id="fahrenheit">
+            <input type="number" name="" placeholder="Fahrenheit">
+            <span class="icon">&#8457;</span>
+        </div>
+        <div id="kelvin">
+            <input type="number" name="" placeholder="Kelvin">
+            <span class="icon">&#8490;</span>
+        </div>
+        <div class="button">
+            <button>All Clear</button>
+        </div>
+    </div>
+    <script>
+        let celsiusInput = document.querySelector('#celsius > input');
+        let fahrenheitInput = document.querySelector('#fahrenheit > input');
+        let kelvinInput = document.querySelector('#kelvin > input');
+        let btn = document.querySelector('.button button');
+
+        let isUpdating = false;
+
+        function roundNumber(number) {
+            return Math.round(number * 100) / 100;
+        }
+
+        function validateAndConvert(value, callback) {
+            if (isNaN(value)) {
+                clearInputs();
+            } else {
+                callback(value);
+            }
+        }
+
+        function clearInputs() {
+            celsiusInput.value = "";
+            fahrenheitInput.value = "";
+            kelvinInput.value = "";
+        }
+
+        celsiusInput.addEventListener('input', debounce(() => {
+            if (isUpdating) return;
+            isUpdating = true;
+            validateAndConvert(parseFloat(celsiusInput.value), (cTemp) => {
+                fahrenheitInput.value = roundNumber((cTemp * (9 / 5)) + 32);
+                kelvinInput.value = roundNumber(cTemp + 273.15);
+            });
+            isUpdating = false;
+        }));
+
+        fahrenheitInput.addEventListener('input', debounce(() => {
+            if (isUpdating) return;
+            isUpdating = true;
+            validateAndConvert(parseFloat(fahrenheitInput.value), (fTemp) => {
+                celsiusInput.value = roundNumber((fTemp - 32) * (5 / 9));
+                kelvinInput.value = roundNumber(((fTemp - 32) * (5 / 9)) + 273.15);
+            });
+            isUpdating = false;
+        }));
+
+        kelvinInput.addEventListener('input', debounce(() => {
+            if (isUpdating) return;
+            isUpdating = true;
+            validateAndConvert(parseFloat(kelvinInput.value), (kTemp) => {
+                celsiusInput.value = roundNumber(kTemp - 273.15);
+                fahrenheitInput.value = roundNumber(((kTemp - 273.15) * (9 / 5)) + 32);
+            });
+            isUpdating = false;
+        }));
+
+        btn.addEventListener('click', () => {
+            clearInputs();
+            btn.textContent = "Cleared!";
+            setTimeout(() => (btn.textContent = "All Clear"), 1000);
+        });
+
+        function debounce(callback, delay = 300) {
+            let timeout;
+            return (...args) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => callback(...args), delay);
+            };
+        }
+    </script>
+</body>
+</html>
